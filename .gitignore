@@ -1,0 +1,11 @@
+/.project
+/.classpath
+/eclasses/
+**/*.class
+/src
+/build
+/dist
+/tpcw/ImgGen/ImgFiles/*.o
+/tpcw/ImgGen/ImgFiles/tpcwIMG
+/make_img-gen.txt
+/populate_images.txt

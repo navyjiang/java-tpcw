@@ -99,6 +99,10 @@ public class TPCW_buy_request_servlet extends HttpServlet {
 	  }
 
 	  cust = TPCW_Database.getCustomer(UNAME);
+	  if (cust==null) {
+	      out.print("Error: Customer " + UNAME + "is null</BODY></HTML>");
+	      return;
+	  }
 	  TPCW_Database.refreshSession(cust.c_id);
 	  if(!PASSWD.equals(cust.c_passwd)){
 	      out.print("Error: Incorrect Password</BODY></HTML>");

@@ -95,21 +95,21 @@
 
 	<!-- Build the class files for the servlets and the database populate class -->
   	<target name="build" depends="mksrc" description="Build the *.class files from source.">
-    		<javac srcdir="${srcServDir}" destdir="${buildServDir}">
+    		<javac srcdir="${srcServDir}" destdir="${buildServDir}" debug="${debug}">
     			<classpath>
       				<pathelement path="${classpath}"/>
       				<pathelement path="${srcServDir}"/>
       				<pathelement location="${cpServ}"/>
     			</classpath>
     		</javac>
-    		<javac srcdir="${srcDir}" destdir="${buildRbeDir}" includes="rbe/**" source="1.3">
+    		<javac srcdir="${srcDir}" destdir="${buildRbeDir}" includes="rbe/**" debug="${debug}">
     			<classpath>
       				<pathelement path="${classpath}"/>
       				<pathelement path="${srcRbeDir}"/>
       				<pathelement location="${cpServ}"/>
     			</classpath>
     		</javac>
-    		<javac srcdir="${srcDbDir}" destdir="${buildDbDir}">
+    		<javac srcdir="${srcDbDir}" destdir="${buildDbDir}" debug="${debug}">
     			<classpath>
       				<pathelement path="${classpath}"/>
       				<pathelement path="${srcDbDir}"/>
@@ -145,7 +145,7 @@
   			<srcfiles dir="${srcRbeDir}" includes="**/*.java"/>
   			<mapper type="glob" from="*.java" to="${basedir}${file.separator}${distDir}${file.separator}${rbeDir}${file.separator}*.class"/>
   		</uptodate>
-  		<uptodate property="db.notNeeded" srcfile="${buildDbDir}/TPCW_populate.class" targetfile="${buildDbDir}/TPCW_populate.class"/>
+  		<uptodate property="db.notNeeded" srcfile="${srcDbDir}/TPCW_populate.java" targetfile="${buildDbDir}/TPCW_populate.class"/>
   		<uptodate property="dbImages.notNeeded" srcfile="${srcDbDir}/populate_images" targetfile="${distDir}/populate_images"/>
 		<condition property="dist.notNeeded">
     			<and>
@@ -176,14 +176,15 @@
 		<copy file="${tpcwDir}/${rbeDir}/README" tofile="${docDir}/readme-rbe.txt" preservelastmodified="true"/>
 		<copy file="${tpcwDir}/README" tofile="${docDir}/readme-tpcw.txt" preservelastmodified="true"/>
 		<copy file="${tpcwDir}/runtpcw" tofile="${distDir}/runtpcw" preservelastmodified="true"/>
+		<chmod file="${distDir}/runtpcw" perm="+x"/>
 		<copy file="${basedir}/rbe.sh" tofile="${distDir}/rbe.sh" preservelastmodified="true"/>
 		<copy file="${tpcwDir}/COPYRIGHT" tofile="${distDir}/copyright" preservelastmodified="true"/>
   	</target>
 
 	<!-- Installation -->
 	<target name="inst" depends="dist" description="Copy war file to desired directory.">
-		<delete file="${webappDir}/tpcw.war"/>
-		<copy file="${distDir}/tpcw.war" todir="${webappDir}"/>
+		<!-- delete file="${webappDir}/tpcw.war"/ -->
+		<unwar src="${distDir}/tpcw.war" dest="${webappDir}/tpcw"/>		
 	</target>
   
 	<!-- DB generation -->

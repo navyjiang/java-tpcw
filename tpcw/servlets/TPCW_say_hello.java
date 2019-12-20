@@ -72,28 +72,29 @@ public class TPCW_say_hello {
 	} 
 	else {//This is a brand new session
 	    
-	    out.println("Thisis a brand new session!");
+	    out.println("This is a brand new session!");
 	    // Check to see if a C_ID was given.  If so, get the customer name
 	    // from the database and say hello.
 	    String C_IDstr = req.getParameter("C_ID");
 	    if (C_IDstr != null) {
-		String name[];
-		int C_ID[] = new int[1];
-		C_ID[0] = Integer.parseInt(C_IDstr, 10);
-                out.flush();
-		// Use C_ID to get the user name from the database.
-		name = TPCW_Database.getName(C_ID[0]);
-		// Set the values for this session.
-		if(name==null){
-		   out.println("Hello unknown user!");
-		   return;
-		}
-		session.putValue("C_ID", C_ID);
-		session.putValue("C_FNAME", name[0]);
-		session.putValue("C_LNAME", name[1]);
-		out.println("Hello " + name[0] + " " + name[1] +".");
+			String name[];
+			int C_ID[] = new int[1];
+			C_ID[0] = Integer.parseInt(C_IDstr, 10);
+	        out.flush();
+	        
+			// Use C_ID to get the user name from the database.
+			name = TPCW_Database.getName(C_ID[0]);
+			// Set the values for this session.
+			if(name==null){
+			   out.println("Hello unknown user!");
+			   return;
+			}
+			session.putValue("C_ID", C_ID);
+			session.putValue("C_FNAME", name[0]);
+			session.putValue("C_LNAME", name[1]);
+			out.println("Hello " + name[0] + " " + name[1] +".");
 		
-	    } 
+	    }
 	    else out.println("Hello unknown user!");
 	}
     }

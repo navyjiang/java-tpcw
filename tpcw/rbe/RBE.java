@@ -128,8 +128,8 @@ public class RBE {
 
   public static void setURLs()
   {
-	 www = www1 + "@servletUrlPath@";
-	 String wwwTPCW = www1 + "@tpcwUrlPath@";
+	 www = www1 + "@servletUrlPath@" + "/";
+	 //String wwwTPCW = www1 + "@tpcwUrlPath@";
 	 homeURL = www+"TPCW_home_interaction";
 	 shopCartURL = www+"TPCW_shopping_cart_interaction";
 	 orderInqURL = www+"TPCW_order_inquiry_servlet";
@@ -392,12 +392,12 @@ public class RBE {
     // Compute default CID A value, if needed.
     if (rbe.cidA == -1) {
       for (i=0;i<stdCIDA.length;i++) {
-	if ((rbe.numCustomer >= stdCIDA[i][0]) &&
-	    (rbe.numCustomer <= stdCIDA[i][1])) {
-	  rbe.cidA = stdCIDA[i][2];
-	  System.out.println("Choose " + rbe.cidA + " for -CUSTA.");
-	  break;
-	}
+		if ((rbe.numCustomer >= stdCIDA[i][0]) &&
+		    (rbe.numCustomer <= stdCIDA[i][1])) {
+		  rbe.cidA = stdCIDA[i][2];
+		  System.out.println("Choose " + rbe.cidA + " for -CUSTA.");
+		  break;
+		}
       }
     }
 
@@ -410,7 +410,7 @@ public class RBE {
       System.out.println("Number of items (" + rbe.numItem + 
 		       ") must be one of ");
       for (i=0;i<stdNumItemA.length;i++) {
-	System.out.println("    " + stdNumItemA[i][0]);
+    	  System.out.println("    " + stdNumItemA[i][0]);
       }
       return;
     }

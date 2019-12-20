@@ -83,7 +83,7 @@ public class TPCW_order_display_servlet extends HttpServlet {
      if(uname!= null && passwd!=null){
 	 
 	 String storedpasswd = TPCW_Database.GetPassword(uname);
-	 if(!storedpasswd.equals(passwd)){
+	 if(!passwd.equals(storedpasswd)){
 	     out.print("Error: Incorrect password.\n");
 	 }
 	 else {
